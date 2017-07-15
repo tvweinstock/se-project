@@ -1,15 +1,52 @@
+// colour variables
+$lightGrey: #D8D8D8;
+$bdrGrey: #E6E6E6;
+$activeBlue: #2897C5;
+
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 13px;
   background: url('/../resources/graphics/background.png') repeat;
 }
 
+header {
+  background-color: #1C688E;
+}
+
+h3 {
+  font-weight: lighter;
+}
+
+main {
+  background-color: #fff;
+  display: flex;
+}
+
+aside, .main-container {
+  padding: 40px;
+}
+
+aside {
+  flex: 1;
+  border-left: 1px solid $bdrGrey;
+}
+
+.main-container {
+  flex: 4;
+}
+
+
+
 #search-box {
-  margin: 1em 1em 3em;
-  padding: 1em;
-  width: calc(100% - 2em);
-  border: 2px solid #ccc;
+  margin: 21px 25px;
+  padding: 10px;
+  width: calc(100% - 50px);
+  border: 2px solid #d6d6d6;
+  color: #B3B3B3;
   box-sizing: border-box;
+  height: 40px;
+  border-radius: 3px;
+  font-size: 15px;
 }
 
 .results-list {

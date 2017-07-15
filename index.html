@@ -13,14 +13,27 @@
   <header>
     <form class="search-form" action="">
       <label for="search-box"></label>
-      <input type="text" id="search-box">
+      <input type="text" id="search-box" placeholder="Search for Restaurants by Name, Cuisine, Location">
     </form>
   </header>
-  <div class="container">
-    <ul class="results-list">
+  <main>
+    <aside class="sidebar">
+      <div class="cuisine-type">
+        <h3>Cuisine/Food Type</h3>
+        <!-- <ul id="cuisine-facet-list"></ul> -->
+        <h3>Rating</h3>
+        <!-- <ul id="rating-facet-list"></ul> -->
+        <h3>Payment Options</h3>
+        <!-- <ul id="payment-facet-list"></ul> -->
+      </div>
+    </aside>
+    <div class="main-container">
+      <ul class="results-list">
 
-    </ul>
-  </div>
+      </ul>
+    </div>
+
+  </main>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>

@@ -8,6 +8,7 @@ var indexName = 'restaurants_list';
 // Parts of DOM we will be using
 var jFacets = $('#facets');
 var jHits = $('#hits');
+var jHitsInfo = $('#hits-info');
 var jSearchInput = $('#search-box');
 
 var client = algoliasearch(applicationID, apiKey);
@@ -45,11 +46,12 @@ function renderFacets(jFacets, results) {
   // We use the disjunctive facets attribute.
   var facets = results.disjunctiveFacets.map(function(facet) {
     var name = facet.name;
-    var header = '<h4>' + name + '</h4>';
+    var nameFormated = name.split('_').join(' ');
+    var header = '<h4>' + nameFormated + '</h4>';
     var facetValues = results.getFacetValues(name);
     var facetsValuesList = $.map(facetValues, function(facetValue) {
       var facetValueClass = facetValue.isRefined ? 'refined'  : '';
-      var valueAndCount = '<a data-attribute="' + name + '" data-value="' + facetValue.name + '" href="#">' + facetValue.name + ' (' + facetValue.count + ')' + '</a>';
+      var valueAndCount = '<a data-attribute="' + name + '" data-value="' + facetValue.name + '" href="#"><span>' + facetValue.name + '</span><span>' + facetValue.count + '</span>' + '</a>';
       return '<li class="' + facetValueClass + '">' + valueAndCount + '</li>';
     })
     return header + '<ul>' + facetsValuesList.join('') + '</ul>';
@@ -70,15 +72,16 @@ function handleFacetClick(e) {
 }
 
 function renderHits(jHits, results) {
-  var hits = results.hits.map(function renderHit(hit) {
-    var highlighted = hit._highlightResult;
-    var attributes = $.map(highlighted, function renderAttributes(attribute, name) {
-      return (
-        '<div class="attribute">' +
-        '<strong>' + name + ': </strong>' + attribute.value +
-        '</div>');
-    }).join('');
-    return '<div class="hit panel">' + attributes + '</div>';
+  var resultsInfoMessage = results.nbHits + " results found in " + results.processingTimeMS / 1000 + " seconds";
+  jHitsInfo.text(resultsInfoMessage)
+  var hitsContent = $.map(results.hits, function(hit) {
+    console.log(hit);
+    return '<li> <div class="hit-image" style="background-image: url('+ hit.image_url +')"></div>' +
+              '<div class="hit-text"><h3>' + hit._highlightResult.name.value + '</h3>' +
+              '<p><span>' + hit.stars_count + '</span> <span>(' + hit.reviews_count+ ' reviews)</span> </p>' +
+              '<p><span>' + hit.food_type + '</span> | <span>' + hit.neighborhood + '</span> | <span>' + hit.price_range + '</span> </p>' +
+            '</div></li>'
   });
-  jHits.html(hits);
+  jHits.html(hitsContent);
+
 }

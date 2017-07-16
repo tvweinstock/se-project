@@ -1,7 +1,16 @@
-// colour variables
+// variables
 $lightGrey: #D8D8D8;
 $bdrGrey: #E6E6E6;
 $activeBlue: #2897C5;
+$bdrRadius: 3px;
+
+// General styles and layout
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -13,8 +22,25 @@ header {
   background-color: #1C688E;
 }
 
-h3 {
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  display: flex;
+}
+
+h4, h3 {
   font-weight: lighter;
+  text-transform: capitalize;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
 }
 
 main {
@@ -22,46 +48,90 @@ main {
   display: flex;
 }
 
-aside, #hits {
+aside, .hits-container {
   padding: 40px;
 }
 
 aside {
   flex: 1;
-  border-left: 1px solid $bdrGrey;
+  border-right: 1px solid $bdrGrey;
 }
 
-#hits {
-  flex: 4;
-}
-
-
-
+// HEADER STYLES
 #search-box {
   margin: 21px 25px;
-  padding: 10px;
+  padding: 15px;
   width: calc(100% - 50px);
   border: 2px solid #d6d6d6;
   color: #B3B3B3;
   box-sizing: border-box;
-  height: 40px;
-  border-radius: 3px;
+  border-radius: $bdrRadius;
   font-size: 15px;
   &::placeholder {
     opacity: 0.4;
   }
 }
 
-.results-list {
-  max-width: 350px;
-  width: 100%;
-  padding: 0 1em;
+// FACETS
+aside li {
+  margin: 2px 0;
+  &:hover a, &.refined a {
+    background: $activeBlue;
+    border-radius: $bdrRadius;
+    color: #fff;
+  }
+}
+
+aside li a {
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  color: #000;
+  width: calc(100% - 20px);
+  position: relative;
+}
+
+// HIT RETSULTS
+.hits-border {
+  height: 1px;
+  display: inline-block;
+  width: 70%;
+  background-color: $bdrGrey;
+}
+
+#hits-info {
+  margin: 0 0 20px;
+  display: inline-block;
+  width: 29%;
+}
+
+#hits li {
+  margin-bottom: 20px;
+}
+
+#hits h3 {
   margin: 0;
+  font-size: 16px;
 }
-.results-list li {
-  list-style: none;
-  line-height: 1.5;
+#hits h3, #hits p {
+  padding-left: 30px;
+  margin: 7px 0;
 }
-.results-list em {
-  background: moccasin;
+#hits p {
+  opacity: .5;
+  font-size: 14px;
+}
+
+.hits-container {
+  flex: 4;
+  padding-right: 0;
+  position: relative;
+}
+.hit-image {
+  height: 80px;
+  flex: 0 0 80px;
+  background-size: cover;
+  background-position: center center;
+  border: 1px solid $bdrGrey;
+  border-radius: $bdrRadius;
 }

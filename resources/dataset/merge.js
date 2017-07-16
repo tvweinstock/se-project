@@ -19,6 +19,7 @@ restaurantInfo1.forEach(function(restaurant) {
 restaurantInfo2.forEach(function(restaurant) {
   // merge object from right to left with Object.assign,
   // pass in empty object just in case there is a new id that didn't exist in the first JSON
+  restaurant.rating = Math.round(restaurant.stars_count);
   restaurantsById[restaurant.objectID] = Object.assign({}, restaurantsById[restaurant.objectID], restaurant);
 });
 

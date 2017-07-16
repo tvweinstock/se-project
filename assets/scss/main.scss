@@ -22,7 +22,6 @@ header {
   background-color: #1C688E;
 }
 
-
 ul {
   margin: 0;
   padding: 0;
@@ -34,7 +33,6 @@ li {
 }
 
 h4, h3 {
-  font-weight: lighter;
   text-transform: capitalize;
 }
 
@@ -91,18 +89,39 @@ aside li a {
   position: relative;
 }
 
+.facet-value {
+  opacity: .5;
+}
+[data-attribute="rating"] .facet-value {
+  display: none;
+}
+
+.stars, .stars-active {
+  display: block;
+  width: 75px;
+  height: 15px;
+  background-image: url('/../resources/graphics/star-empty.png');
+  background-repeat: repeat-x;
+  background-size: contain;
+}
+
+.stars-active {
+  background-image: url('/../resources/graphics/stars-plain.png');
+}
+
 // HIT RETSULTS
 .hits-border {
   height: 1px;
   display: inline-block;
-  width: 70%;
+  width: 60%;
   background-color: $bdrGrey;
 }
 
 #hits-info {
   margin: 0 0 20px;
   display: inline-block;
-  width: 29%;
+  width: 39%;
+  font-weight: lighter;
 }
 
 #hits li {

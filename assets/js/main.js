@@ -14,7 +14,7 @@ var jSearchInput = $('#search-box');
 var client = algoliasearch(applicationID, apiKey);
 var helper = algoliasearchHelper(client, indexName, {
   // define disjunctive facets
-  disjunctiveFacets: ['food_type', 'stars_count', 'payment_options']
+  disjunctiveFacets: ['food_type', 'rating', 'payment_options']
 });
 
 // take the result event and bind to it an updating results function
@@ -25,7 +25,6 @@ jFacets.on('click', handleFacetClick);
 
 // Tigger first search so we have page with results from start
 helper.search();
-
 
 jSearchInput.on('keyup', function() {
   helper.setQuery($(this).val())
@@ -42,6 +41,13 @@ function searchCallback(results) {
   renderFacets(jFacets, results);
 }
 
+function displayStars(number) {
+  console.log('star >>>>', number);
+  var activeStarWidth = number * 15;
+  var stars = '<span data-value='+ number +' data-attribute="rating" class="stars"><span data-value='+ number + ' data-attribute="rating" class="stars-active" style="width:'+ activeStarWidth +'px"></span>';
+  return stars;
+}
+
 function renderFacets(jFacets, results) {
   // We use the disjunctive facets attribute.
   var facets = results.disjunctiveFacets.map(function(facet) {
@@ -50,8 +56,9 @@ function renderFacets(jFacets, results) {
     var header = '<h4>' + nameFormated + '</h4>';
     var facetValues = results.getFacetValues(name);
     var facetsValuesList = $.map(facetValues, function(facetValue) {
+      var facetValueName = name !== "rating" ?  '<span>' + facetValue.name + '</span>' : displayStars(facetValue.name);
       var facetValueClass = facetValue.isRefined ? 'refined'  : '';
-      var valueAndCount = '<a data-attribute="' + name + '" data-value="' + facetValue.name + '" href="#"><span>' + facetValue.name + '</span><span>' + facetValue.count + '</span>' + '</a>';
+      var valueAndCount = '<a data-attribute="' + name + '" data-value="' + facetValue.name + '" href="#">' + facetValueName + '<span class="facet-value">' + facetValue.count + '</span>' + '</a>';
       return '<li class="' + facetValueClass + '">' + valueAndCount + '</li>';
     })
     return header + '<ul>' + facetsValuesList.join('') + '</ul>';
@@ -65,9 +72,7 @@ function handleFacetClick(e) {
   var target = e.target;
   var attribute = target.dataset.attribute;
   var value = target.dataset.value;
-  // Because we are listening in the parent, the user might click where there is no data
   if(!attribute || !value) return;
-  // The toggleRefine method works for disjunctive facets as well
   helper.toggleRefine(attribute, value).search();
 }
 
@@ -75,7 +80,6 @@ function renderHits(jHits, results) {
   var resultsInfoMessage = results.nbHits + " results found in " + results.processingTimeMS / 1000 + " seconds";
   jHitsInfo.text(resultsInfoMessage)
   var hitsContent = $.map(results.hits, function(hit) {
-    console.log(hit);
     return '<li> <div class="hit-image" style="background-image: url('+ hit.image_url +')"></div>' +
               '<div class="hit-text"><h3>' + hit._highlightResult.name.value + '</h3>' +
               '<p><span>' + hit.stars_count + '</span> <span>(' + hit.reviews_count+ ' reviews)</span> </p>' +

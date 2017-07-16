@@ -22,7 +22,7 @@ main {
   display: flex;
 }
 
-aside, .main-container {
+aside, #hits {
   padding: 40px;
 }
 
@@ -31,7 +31,7 @@ aside {
   border-left: 1px solid $bdrGrey;
 }
 
-.main-container {
+#hits {
   flex: 4;
 }
 
@@ -47,6 +47,9 @@ aside {
   height: 40px;
   border-radius: 3px;
   font-size: 15px;
+  &::placeholder {
+    opacity: 0.4;
+  }
 }
 
 .results-list {

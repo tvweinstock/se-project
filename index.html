@@ -13,24 +13,19 @@
   <header>
     <form class="search-form" action="">
       <label for="search-box"></label>
-      <input type="text" id="search-box" placeholder="Search for Restaurants by Name, Cuisine, Location">
+      <input type="text" id="search-box" placeholder="Search for Restaurants by Name, Cuisine, Location"  autocomplete="off">
     </form>
   </header>
   <main>
     <aside class="sidebar">
       <div class="cuisine-type">
-        <h3>Cuisine/Food Type</h3>
-        <!-- <ul id="cuisine-facet-list"></ul> -->
-        <h3>Rating</h3>
-        <!-- <ul id="rating-facet-list"></ul> -->
-        <h3>Payment Options</h3>
-        <!-- <ul id="payment-facet-list"></ul> -->
+
+        <ul id="facets"></ul>
+
       </div>
     </aside>
-    <div class="main-container">
-      <ul class="results-list">
+    <div id="hits">
 
-      </ul>
     </div>
 
   </main>

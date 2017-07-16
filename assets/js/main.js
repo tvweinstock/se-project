@@ -5,66 +5,80 @@ var applicationID = '7Y37FN61ON';
 var apiKey = 'c2a03525b10a68c5cef230060122ebb4';
 var indexName = 'restaurants_list';
 
+// Parts of DOM we will be using
+var jFacets = $('#facets');
+var jHits = $('#hits');
+var jSearchInput = $('#search-box');
+
 var client = algoliasearch(applicationID, apiKey);
-var helper = algoliasearchHelper(client, indexName)//, {
-  // add attribute to facet in display configuration of index
-  // facets: ['food_type', 'stars_count', 'payment_options']
-// };
-
-$(document).ready(function() {
-
-  helper.on('result', function(content) {
-    // filter list for cuisine type
-    // renderFacetList(content);
-    // TODO create facet lists so users can flter by ratings and payment options
-
-    // set main list results
-    renderHits(content);
-  });
-
-  // render dynamic list of facets. render list each time  new results are received
-  // this list will allow user to select a value made possible using jQuery
-  function renderFacetList(content) {
-    $('#cuisine-type-list').html(function() {
-      // getFacetValues will return list of values (an object) usable to filter an attribute
-      // returned object contains 3 properties: name (facet value), count (number of items in results)
-      // isRefined (boolean - is value already selected)
-      return $.map(content.getFacetValues('food_type'), function(facet) {
-        var checkbox = $('<input type=checkbox>')
-            .data('facet', facet.name)
-            .attr('id', 'fl-' + facet.name);
-        if (facet.isRefined) checkbox.attr('checked', 'checked');
-        var label = $('label').html(facet.name + ' (' + facet.count + ')')
-                              .attr('for', 'fl-' + facet.name);
-        // dynamically append list item for each value in the results
-        return $('<li>').append(checkbox).append(label);
-
-      });
-    });
-  }
-
-  function renderHits(content) {
-    console.log(content.hits);
-    $('.results-list').html(function() {
-      return $.map(content.hits, function(hit) {
-        return '<li><img src=' + hit.image_url +'><h3>' + hit._highlightResult.name.value + '</h3></li>';
-      });
-    });
-  }
-
-  // EVENT LISTENERS
-
-  // event listener for user click on facet list
-  $('#cuisine-type-list').on('click', 'input[type=checkbox]', function(e) {
-    var facetValue = $(this).data('facet');
-    helper.toggleFacetRefinement('food_type', facetValue)
-          .search();
-  });
-
-  // event listener for user typing input
-  $('#search-box').on('keyup', function() {
-    helper.setQuery($(this).val())
-    .search();
-  });
-  helper.search();
+var helper = algoliasearchHelper(client, indexName, {
+  // define disjunctive facets
+  disjunctiveFacets: ['food_type', 'stars_count', 'payment_options']
 });
+
+// take the result event and bind to it an updating results function
+helper.on('result', searchCallback);
+
+// Bind Event Listeners
+jFacets.on('click', handleFacetClick);
+
+// Tigger first search so we have page with results from start
+helper.search();
+
+
+jSearchInput.on('keyup', function() {
+  helper.setQuery($(this).val())
+  .search();
+});
+
+function searchCallback(results) {
+  if (results.hits.length === 0) {
+    // No results message
+    jHits.empty().html("No results 😔");
+    return;
+  }
+  renderHits(jHits, results);
+  renderFacets(jFacets, results);
+}
+
+function renderFacets(jFacets, results) {
+  // We use the disjunctive facets attribute.
+  var facets = results.disjunctiveFacets.map(function(facet) {
+    var name = facet.name;
+    var header = '<h4>' + name + '</h4>';
+    var facetValues = results.getFacetValues(name);
+    var facetsValuesList = $.map(facetValues, function(facetValue) {
+      var facetValueClass = facetValue.isRefined ? 'refined'  : '';
+      var valueAndCount = '<a data-attribute="' + name + '" data-value="' + facetValue.name + '" href="#">' + facetValue.name + ' (' + facetValue.count + ')' + '</a>';
+      return '<li class="' + facetValueClass + '">' + valueAndCount + '</li>';
+    })
+    return header + '<ul>' + facetsValuesList.join('') + '</ul>';
+  });
+
+  jFacets.html(facets.join(''));
+}
+
+function handleFacetClick(e) {
+  e.preventDefault();
+  var target = e.target;
+  var attribute = target.dataset.attribute;
+  var value = target.dataset.value;
+  // Because we are listening in the parent, the user might click where there is no data
+  if(!attribute || !value) return;
+  // The toggleRefine method works for disjunctive facets as well
+  helper.toggleRefine(attribute, value).search();
+}
+
+function renderHits(jHits, results) {
+  var hits = results.hits.map(function renderHit(hit) {
+    var highlighted = hit._highlightResult;
+    var attributes = $.map(highlighted, function renderAttributes(attribute, name) {
+      return (
+        '<div class="attribute">' +
+        '<strong>' + name + ': </strong>' + attribute.value +
+        '</div>');
+    }).join('');
+    return '<div class="hit panel">' + attributes + '</div>';
+  });
+  jHits.html(hits);
+}

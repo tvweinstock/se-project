@@ -16,7 +16,7 @@ html {
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 13px;
-  background: url('../resources/graphics/background.png') repeat;
+  background: url('graphics/background.png') repeat;
 }
 
 header {
@@ -71,13 +71,13 @@ aside {
   display: inline-block;
   width: 75px;
   height: 15px;
-  background-image: url('../resources/graphics/star-empty.png');
+  background-image: url('graphics/star-empty.png');
   background-repeat: repeat-x;
   background-size: contain;
 }
 
 .stars-active {
-  background-image: url('../resources/graphics/stars-plain.png');
+  background-image: url('graphics/stars-plain.png');
 }
 
 

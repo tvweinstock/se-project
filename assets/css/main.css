@@ -1,0 +1,167 @@
+/* line 9, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+html {
+  box-sizing: border-box; }
+
+/* line 12, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+/* line 16, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  background: url("/../resources/graphics/background.png") repeat; }
+
+/* line 22, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+header {
+  background-color: #1C688E; }
+
+/* line 26, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+ul {
+  margin: 0;
+  padding: 0; }
+
+/* line 31, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+li {
+  list-style: none;
+  display: flex; }
+
+/* line 36, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+h4, h3 {
+  text-transform: capitalize; }
+
+/* line 40, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+a {
+  text-decoration: none;
+  color: #000; }
+
+/* line 45, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+.main-wrapper {
+  width: 80%;
+  margin: 50px auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); }
+
+/* line 51, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+main {
+  background-color: #fff;
+  display: flex; }
+
+/* line 56, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+aside, .hits-container {
+  padding: 40px; }
+
+/* line 60, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+aside {
+  flex: 1;
+  border-right: 1px solid #E6E6E6; }
+
+/* line 65, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+.fade {
+  opacity: .5; }
+
+/* line 70, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+.stars, .stars-active {
+  display: inline-block;
+  width: 75px;
+  height: 15px;
+  background-image: url("/../resources/graphics/star-empty.png");
+  background-repeat: repeat-x;
+  background-size: contain; }
+
+/* line 79, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+.stars-active {
+  background-image: url("/../resources/graphics/stars-plain.png"); }
+
+/* line 85, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+#search-box {
+  margin: 21px 25px;
+  padding: 15px;
+  width: calc(100% - 50px);
+  border: 2px solid #d6d6d6;
+  color: #B3B3B3;
+  box-sizing: border-box;
+  border-radius: 3px;
+  font-size: 15px; }
+  /* line 94, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+  #search-box::placeholder {
+    opacity: 0.4; }
+
+/* line 100, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+aside li {
+  margin: 2px 0; }
+  /* line 102, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+  aside li:hover a, aside li.refined a {
+    background: #2897C5;
+    border-radius: 3px;
+    color: #fff; }
+
+/* line 109, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+aside li a {
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  color: #000;
+  width: calc(100% - 20px);
+  position: relative; }
+
+/* line 118, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+[data-attribute="rating"] .facet-value {
+  display: none; }
+
+/* line 123, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+.hits-border {
+  height: 1px;
+  display: inline-block;
+  width: 60%;
+  background-color: #E6E6E6; }
+
+/* line 130, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+#hits-info {
+  margin: 0 0 20px;
+  display: inline-block;
+  width: 39%;
+  font-weight: lighter; }
+
+/* line 137, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+#hits {
+  margin-top: 10px; }
+
+/* line 141, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+#hits li {
+  margin-bottom: 20px; }
+
+/* line 145, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+#hits h3 {
+  margin: 0;
+  font-size: 16px; }
+
+/* line 149, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+#hits h3, #hits p {
+  padding-left: 30px;
+  margin: 0 0 7px; }
+
+/* line 153, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+#hits p {
+  font-size: 14px; }
+
+/* line 157, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+.hits-container {
+  flex: 4;
+  padding-right: 0;
+  position: relative; }
+
+/* line 162, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+.hit-image {
+  height: 80px;
+  flex: 0 0 80px;
+  background-size: cover;
+  background-position: center center;
+  border: 1px solid #E6E6E6;
+  border-radius: 3px; }
+
+/* line 171, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+.hit-reviews span:first-child {
+  color: #ffab66;
+  margin-right: 10px; }
+
+/*# sourceMappingURL=../../scss */

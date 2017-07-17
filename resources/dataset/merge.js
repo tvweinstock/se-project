@@ -1,6 +1,8 @@
 var fs = require('fs');
+
 var restaurantInfo1 = require('./restaurants_list.json');
 var restaurantInfo2 = require('./restaurants_info_converted.json');
+var restaurantsById = {};
 
 var paymentOptions = ['AMEX/American Express', 'Visa', 'MasterCard', 'Discover'];
 
@@ -12,11 +14,10 @@ var cardsMap = {
   'Cash Only': ''
 }
 
-var restaurantsById = {};
-
 restaurantInfo1.forEach(function(restaurant) {
 
   restaurant.payment_options = restaurant.payment_options.map(function(paymentOption) {
+    // Clean up payment options to remove/update irrelevant fields
     if (paymentOption in cardsMap) {
       return cardsMap[paymentOption];
     }
@@ -41,11 +42,3 @@ var outputArray = Object.keys(restaurantsById).map(function(key) {
 
 // use node FileSync to write merged json into a new file
 fs.writeFileSync('restaurant_info_merged.json', JSON.stringify(outputArray, '', 2));
-
-// TODO
-// Change name of food_type to cuisine/food_type_type
-// change name of Stars count to rating
-
-// For payment options we should only
-// AMEX/American Express, Visa, Discover, and MasterCard
-// Diners Club and Carte Blanche are Discover cards

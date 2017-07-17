@@ -42,7 +42,6 @@ function searchCallback(results) {
 }
 
 function displayStars(number) {
-  console.log('star >>>>', number);
   var activeStarWidth = number * 15;
   var stars = '<span data-value='+ number +' data-attribute="rating" class="stars"><span data-value='+ number + ' data-attribute="rating" class="stars-active" style="width:'+ activeStarWidth +'px"></span>';
   return stars;
@@ -56,9 +55,9 @@ function renderFacets(jFacets, results) {
     var header = '<h4>' + nameFormated + '</h4>';
     var facetValues = results.getFacetValues(name);
     var facetsValuesList = $.map(facetValues, function(facetValue) {
-      var facetValueName = name !== "rating" ?  '<span>' + facetValue.name + '</span>' : displayStars(facetValue.name);
+      var facetValueName = name !== "rating" ?  '<span data-attribute="' + name + '" data-value="' + facetValue.name + '" >' + facetValue.name + '</span>' : displayStars(facetValue.name);
       var facetValueClass = facetValue.isRefined ? 'refined'  : '';
-      var valueAndCount = '<a data-attribute="' + name + '" data-value="' + facetValue.name + '" href="#">' + facetValueName + '<span class="facet-value fade">' + facetValue.count + '</span>' + '</a>';
+      var valueAndCount = '<a data-attribute="' + name + '" data-value="' + facetValue.name + '" href="#">' + facetValueName + '<span class="facet-value fade" data-attribute="' + name + '" data-value="' + facetValue.name + '" >' + facetValue.count + '</span>' + '</a>';
       return '<li class="' + facetValueClass + '">' + valueAndCount + '</li>';
     })
     return header + '<ul>' + facetsValuesList.join('') + '</ul>';

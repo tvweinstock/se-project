@@ -1,17 +1,27 @@
 var fs = require('fs');
 var restaurantInfo1 = require('./restaurants_list.json');
 var restaurantInfo2 = require('./restaurants_info_converted.json');
-// var dicoverCard = 'Discover' || 'Diners Club' || 'Carte Blanche';
-// var paymentOptions = ['AMEX/American Express', 'Visa', 'MasterCard', dicoverCard];
 
-// var keyReplacement = {
-//   'food_type': 'cuisine/food_type',
-//   'stars_count': 'rating'
-// }
+var paymentOptions = ['AMEX/American Express', 'Visa', 'MasterCard', 'Discover'];
+
+var cardsMap = {
+  'Diners Club': 'Discover',
+  'Carte Blanche': 'Discover',
+  'JCB': '',
+  'Pay with OpenTable': '',
+  'Cash Only': ''
+}
 
 var restaurantsById = {};
 
 restaurantInfo1.forEach(function(restaurant) {
+
+  restaurant.payment_options = restaurant.payment_options.map(function(paymentOption) {
+    if (paymentOption in cardsMap) {
+      return cardsMap[paymentOption];
+    }
+    return paymentOption;
+  });
   // map restaurant object to key
   restaurantsById[restaurant.objectID] = restaurant;
 });
@@ -30,7 +40,7 @@ var outputArray = Object.keys(restaurantsById).map(function(key) {
 });
 
 // use node FileSync to write merged json into a new file
-fs.writeFileSync('restaurant_info_merged.json', JSON.stringify(outputArray));
+fs.writeFileSync('restaurant_info_merged.json', JSON.stringify(outputArray, '', 2));
 
 // TODO
 // Change name of food_type to cuisine/food_type_type

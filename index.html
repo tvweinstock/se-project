@@ -9,27 +9,28 @@
     <link rel="stylesheet" href="assets/css/main.css">
   </head>
   <body>
-
-  <header>
-    <form class="search-form" action="">
-      <label for="search-box"></label>
-      <input type="text" id="search-box" placeholder="Search for Restaurants by Name, Cuisine, Location"  autocomplete="off">
-    </form>
-  </header>
-  <main>
-    <aside class="sidebar">
-      <div class="cuisine-type">
-        <ul id="facets"></ul>
+  <div class="main-wrapper">
+    <header>
+      <form class="search-form" action="">
+        <label for="search-box"></label>
+        <input type="text" id="search-box" placeholder="Search for Restaurants by Name, Cuisine, Location"  autocomplete="off">
+      </form>
+    </header>
+    <main>
+      <aside class="sidebar">
+        <div class="cuisine-type">
+          <ul id="facets"></ul>
+        </div>
+      </aside>
+      <div class="hits-container">
+        <h4 id="hits-info"></h4>
+        <span class="hits-border"></span>
+        <ul id="hits"></ul>
       </div>
-    </aside>
-    <div class="hits-container">
-      <h4 id="hits-info"></h4>
-      <span class="hits-border"></span>
-      <ul id="hits"></ul>
-    </div>
 
-  </main>
+    </main>
 
+  </div>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
   <script src="build/js/main.js"></script>

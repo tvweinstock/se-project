@@ -10,7 +10,7 @@ gulp.task('serve', function() {
     });
 });
 
-// Watching scss/less/html files
+// Watching scss/html files
 gulp.task('watch', ['serve', 'sass', 'scripts'], function() {
     gulp.watch("assets/scss/*.scss", ['sass']);
     gulp.watch("assets/js/*.js", ['scripts']);

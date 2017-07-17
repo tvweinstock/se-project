@@ -58,7 +58,7 @@ function renderFacets(jFacets, results) {
     var facetsValuesList = $.map(facetValues, function(facetValue) {
       var facetValueName = name !== "rating" ?  '<span>' + facetValue.name + '</span>' : displayStars(facetValue.name);
       var facetValueClass = facetValue.isRefined ? 'refined'  : '';
-      var valueAndCount = '<a data-attribute="' + name + '" data-value="' + facetValue.name + '" href="#">' + facetValueName + '<span class="facet-value">' + facetValue.count + '</span>' + '</a>';
+      var valueAndCount = '<a data-attribute="' + name + '" data-value="' + facetValue.name + '" href="#">' + facetValueName + '<span class="facet-value fade">' + facetValue.count + '</span>' + '</a>';
       return '<li class="' + facetValueClass + '">' + valueAndCount + '</li>';
     })
     return header + '<ul>' + facetsValuesList.join('') + '</ul>';
@@ -82,8 +82,8 @@ function renderHits(jHits, results) {
   var hitsContent = $.map(results.hits, function(hit) {
     return '<li> <div class="hit-image" style="background-image: url('+ hit.image_url +')"></div>' +
               '<div class="hit-text"><h3>' + hit._highlightResult.name.value + '</h3>' +
-              '<p><span>' + hit.stars_count + '</span> <span>(' + hit.reviews_count+ ' reviews)</span> </p>' +
-              '<p><span>' + hit.food_type + '</span> | <span>' + hit.neighborhood + '</span> | <span>' + hit.price_range + '</span> </p>' +
+              '<p class="hit-reviews"><span>' + hit.stars_count + '</span><span class="stars"><span class="stars-active" style="width:' + hit.stars_count * 15 + 'px;"></span></span> <span>(' + hit.reviews_count+ ' reviews)</span> </p>' +
+              '<p class="fade"><span>' + hit.food_type + '</span> | <span>' + hit.neighborhood + '</span> | <span>' + hit.price_range + '</span> </p>' +
             '</div></li>'
   });
   jHits.html(hitsContent);

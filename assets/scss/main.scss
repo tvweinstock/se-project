@@ -2,6 +2,7 @@
 $lightGrey: #D8D8D8;
 $bdrGrey: #E6E6E6;
 $activeBlue: #2897C5;
+$starYellow: #ffab66;
 $bdrRadius: 3px;
 
 // General styles and layout
@@ -55,6 +56,25 @@ aside {
   border-right: 1px solid $bdrGrey;
 }
 
+.fade {
+  opacity: .5;
+}
+
+// reusable star review styles
+.stars, .stars-active {
+  display: inline-block;
+  width: 75px;
+  height: 15px;
+  background-image: url('/../resources/graphics/star-empty.png');
+  background-repeat: repeat-x;
+  background-size: contain;
+}
+
+.stars-active {
+  background-image: url('/../resources/graphics/stars-plain.png');
+}
+
+
 // HEADER STYLES
 #search-box {
   margin: 21px 25px;
@@ -89,24 +109,8 @@ aside li a {
   position: relative;
 }
 
-.facet-value {
-  opacity: .5;
-}
 [data-attribute="rating"] .facet-value {
   display: none;
-}
-
-.stars, .stars-active {
-  display: block;
-  width: 75px;
-  height: 15px;
-  background-image: url('/../resources/graphics/star-empty.png');
-  background-repeat: repeat-x;
-  background-size: contain;
-}
-
-.stars-active {
-  background-image: url('/../resources/graphics/stars-plain.png');
 }
 
 // HIT RETSULTS
@@ -124,6 +128,10 @@ aside li a {
   font-weight: lighter;
 }
 
+#hits {
+  margin-top: 10px;
+}
+
 #hits li {
   margin-bottom: 20px;
 }
@@ -134,10 +142,9 @@ aside li a {
 }
 #hits h3, #hits p {
   padding-left: 30px;
-  margin: 7px 0;
+  margin: 0 0 7px;
 }
 #hits p {
-  opacity: .5;
   font-size: 14px;
 }
 
@@ -153,4 +160,9 @@ aside li a {
   background-position: center center;
   border: 1px solid $bdrGrey;
   border-radius: $bdrRadius;
+}
+
+.hit-reviews span:first-child {
+  color: $starYellow;
+  margin-right: 10px;
 }

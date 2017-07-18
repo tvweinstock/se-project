@@ -1,7 +1,7 @@
 // variables
 $lightGrey: #D8D8D8;
 $bdrGrey: #E6E6E6;
-$activeBlue: #2897C5;
+$activeBlue: #1C688E;
 $starYellow: #ffab66;
 $bdrRadius: 3px;
 
@@ -20,7 +20,7 @@ body {
 }
 
 header {
-  background-color: #1C688E;
+  background-color: $activeBlue;
 }
 
 ul {
@@ -46,12 +46,35 @@ a {
   width: 80%;
   margin: 50px auto;
   box-shadow: 0 2px 6px rgba(0,0,0,.2);
+  position: relative;
 }
 
 main {
   background-color: #fff;
   display: flex;
+  position: relative;
+  min-height: 100vh;
 }
+
+// loader styles
+.loader-container {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.7)
+}
+
+.loader {
+  position: absolute;
+  top: 30%; left: 50%;
+  margin-top: -25px; margin-left: -25px;
+  font-size: 50px;
+  opacity: .6;
+  animation:spin 1s linear infinite;
+  width: 40px; height: 40px; line-height: 40px;
+  color: $activeBlue;
+}
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 aside, .hits-container {
   padding: 40px;

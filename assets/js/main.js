@@ -12,13 +12,13 @@ $(document).ready(function () {
   var jHits = $('#hits');
   var jHitsInfo = $('#hits-info');
   var jSearchInput = $('#search-box');
+  var jLoader = $('.loader-container');
 
   var client = algoliasearch(applicationID, apiKey);
   var helper = algoliasearchHelper(client, indexName, {
     // define disjunctive facets
-    disjunctiveFacets: ['cuisine-food_type', 'rating', 'payment_options']
+    disjunctiveFacets: ['cuisine_food_type', 'rating', 'payment_options']
   });
-
 
   function success(position) {
     var lat = position.coords.latitude;
@@ -26,6 +26,7 @@ $(document).ready(function () {
     // set a search to coordinates of user if it is provided
     helper.setQueryParameter('aroundLatLng', `${lat}, ${long}`);
     helper.search();
+    jLoader.hide();
   }
 
   function error() {
@@ -34,6 +35,7 @@ $(document).ready(function () {
     // set a search to coordinates of San fran user location is not provided
     helper.setQueryParameter('aroundLatLng', `${sfLat}, ${sfLong}`);
     helper.search();
+    jLoader.hide();
   }
   // Get user location
   navigator.geolocation.getCurrentPosition(success, error);
@@ -73,8 +75,7 @@ $(document).ready(function () {
     var facets = results.disjunctiveFacets.map(function(facet) {
       var name = facet.name;
       var nameFormated = name.split('_').join(' ');
-      var nameFormated2 = nameFormated.split('-').join('/');
-      var header = '<h4>' + nameFormated2 + '</h4>';
+      var header = '<h4>' + nameFormated + '</h4>';
       var facetValues = results.getFacetValues(name);
       var facetsValuesList = $.map(facetValues, function(facetValue) {
         var facetValueName = name !== "rating" ?  '<span data-attribute="' + name + '" data-value="' + facetValue.name + '" >' + facetValue.name + '</span>' : displayStars(facetValue.name);
@@ -101,11 +102,10 @@ $(document).ready(function () {
     var resultsInfoMessage = results.nbHits + " results found in " + results.processingTimeMS / 1000 + " seconds";
     jHitsInfo.text(resultsInfoMessage)
     var hitsContent = $.map(results.hits, function(hit) {
-      console.log(hit.cui);
       return '<li> <div class="hit-image" style="background-image: url('+ hit.image_url +')"></div>' +
                 '<div class="hit-text"><h3>' + hit._highlightResult.name.value + '</h3>' +
                 '<p class="hit-reviews"><span>' + hit.stars_count + '</span><span class="stars"><span class="stars-active" style="width:' + hit.stars_count * 15 + 'px;"></span></span> <span>(' + hit.reviews_count+ ' reviews)</span> </p>' +
-                '<p class="fade"><span>' + hit.food_type + '</span> | <span>' + hit.neighborhood + '</span> | <span>' + hit.price_range + '</span> </p>' +
+                '<p class="fade"><span>' + hit.cuisine_food_type + '</span> | <span>' + hit.neighborhood + '</span> | <span>' + hit.price_range + '</span> </p>' +
               '</div></li>'
     });
     jHits.html(hitsContent);

@@ -15,7 +15,7 @@ var cardsMap = {
 }
 
 var foodType = 'food_type';
-var foodCuisineType = 'cuisine-food_type';
+var foodCuisineType = 'cuisine_food_type';
 
 restaurantInfo1.forEach(function(restaurant) {
 

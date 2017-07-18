@@ -39,7 +39,7 @@ a {
 .main-wrapper {
   width: 80%;
   margin: 50px auto;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); }
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); }
 
 /* line 51, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
 main {
@@ -78,24 +78,23 @@ aside {
   padding: 15px;
   width: calc(100% - 50px);
   border: 2px solid #d6d6d6;
-  color: #B3B3B3;
   box-sizing: border-box;
   border-radius: 3px;
   font-size: 15px; }
-  /* line 94, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+  /* line 93, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
   #search-box::placeholder {
     opacity: 0.4; }
 
-/* line 100, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+/* line 99, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
 aside li {
   margin: 2px 0; }
-  /* line 102, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+  /* line 101, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
   aside li:hover a, aside li.refined a {
     background: #2897C5;
     border-radius: 3px;
     color: #fff; }
 
-/* line 109, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+/* line 108, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
 aside li a {
   padding: 5px 10px;
   display: flex;
@@ -104,53 +103,53 @@ aside li a {
   width: calc(100% - 20px);
   position: relative; }
 
-/* line 118, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+/* line 117, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
 [data-attribute="rating"] .facet-value {
   display: none; }
 
-/* line 123, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+/* line 122, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
 .hits-border {
   height: 1px;
   display: inline-block;
   width: 60%;
   background-color: #E6E6E6; }
 
-/* line 130, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+/* line 129, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
 #hits-info {
   margin: 0 0 20px;
   display: inline-block;
   width: 39%;
   font-weight: lighter; }
 
-/* line 137, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+/* line 136, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
 #hits {
   margin-top: 10px; }
 
-/* line 141, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+/* line 140, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
 #hits li {
   margin-bottom: 20px; }
 
-/* line 145, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+/* line 144, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
 #hits h3 {
   margin: 0;
   font-size: 16px; }
 
-/* line 149, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+/* line 148, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
 #hits h3, #hits p {
   padding-left: 30px;
   margin: 0 0 7px; }
 
-/* line 153, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+/* line 152, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
 #hits p {
   font-size: 14px; }
 
-/* line 157, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+/* line 156, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
 .hits-container {
   flex: 4;
   padding-right: 0;
   position: relative; }
 
-/* line 162, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+/* line 161, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
 .hit-image {
   height: 80px;
   flex: 0 0 80px;
@@ -159,7 +158,7 @@ aside li a {
   border: 1px solid #E6E6E6;
   border-radius: 3px; }
 
-/* line 171, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+/* line 170, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
 .hit-reviews span:first-child {
   color: #ffab66;
   margin-right: 10px; }

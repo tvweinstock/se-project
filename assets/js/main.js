@@ -16,7 +16,7 @@ $(document).ready(function () {
   var client = algoliasearch(applicationID, apiKey);
   var helper = algoliasearchHelper(client, indexName, {
     // define disjunctive facets
-    disjunctiveFacets: ['food_type', 'rating', 'payment_options']
+    disjunctiveFacets: ['cuisine/food_type', 'rating', 'payment_options']
   });
 
 

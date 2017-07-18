@@ -45,7 +45,7 @@ a {
 .main-wrapper {
   width: 80%;
   margin: 50px auto;
-  box-shadow: 0 2px 6px rgba(0,0,0,.5);
+  box-shadow: 0 2px 6px rgba(0,0,0,.2);
 }
 
 main {
@@ -87,7 +87,6 @@ aside {
   padding: 15px;
   width: calc(100% - 50px);
   border: 2px solid #d6d6d6;
-  color: #B3B3B3;
   box-sizing: border-box;
   border-radius: $bdrRadius;
   font-size: 15px;

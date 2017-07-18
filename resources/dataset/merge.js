@@ -15,7 +15,7 @@ var cardsMap = {
 }
 
 var foodType = 'food_type';
-var foodCuisineType = 'cuisine/food_type';
+var foodCuisineType = 'cuisine_food_type';
 
 restaurantInfo1.forEach(function(restaurant) {
 
@@ -26,6 +26,9 @@ restaurantInfo1.forEach(function(restaurant) {
     }
     return paymentOption;
   });
+  // remove duplicate instances of Discover in payment types
+  var paymentOptionObj = new Set(restaurant.payment_options);
+  restaurant.payment_options = Array.from(paymentOptionObj);
   // map restaurant object to key
   restaurantsById[restaurant.objectID] = restaurant;
 });

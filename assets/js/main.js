@@ -16,7 +16,7 @@ $(document).ready(function () {
   var client = algoliasearch(applicationID, apiKey);
   var helper = algoliasearchHelper(client, indexName, {
     // define disjunctive facets
-    disjunctiveFacets: ['cuisine_food_type', 'rating', 'payment_options']
+    disjunctiveFacets: ['cuisine-food_type', 'rating', 'payment_options']
   });
 
 
@@ -71,10 +71,10 @@ $(document).ready(function () {
   function renderFacets(jFacets, results) {
     // We use the disjunctive facets attribute.
     var facets = results.disjunctiveFacets.map(function(facet) {
-      var name = facet.name.split('_').join(' ');
-      var nameFormated = name.split('-').join('/');
-      console.log(nameFormated);
-      var header = '<h4>' + nameFormated + '</h4>';
+      var name = facet.name;
+      var nameFormated = name.split('_').join(' ');
+      var nameFormated2 = nameFormated.split('-').join('/');
+      var header = '<h4>' + nameFormated2 + '</h4>';
       var facetValues = results.getFacetValues(name);
       var facetsValuesList = $.map(facetValues, function(facetValue) {
         var facetValueName = name !== "rating" ?  '<span data-attribute="' + name + '" data-value="' + facetValue.name + '" >' + facetValue.name + '</span>' : displayStars(facetValue.name);
@@ -101,7 +101,7 @@ $(document).ready(function () {
     var resultsInfoMessage = results.nbHits + " results found in " + results.processingTimeMS / 1000 + " seconds";
     jHitsInfo.text(resultsInfoMessage)
     var hitsContent = $.map(results.hits, function(hit) {
-
+      console.log(hit.cui);
       return '<li> <div class="hit-image" style="background-image: url('+ hit.image_url +')"></div>' +
                 '<div class="hit-text"><h3>' + hit._highlightResult.name.value + '</h3>' +
                 '<p class="hit-reviews"><span>' + hit.stars_count + '</span><span class="stars"><span class="stars-active" style="width:' + hit.stars_count * 15 + 'px;"></span></span> <span>(' + hit.reviews_count+ ' reviews)</span> </p>' +

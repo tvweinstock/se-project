@@ -14,6 +14,9 @@ var cardsMap = {
   'Cash Only': ''
 }
 
+var foodType = 'food_type';
+var foodCuisineType = 'cuisine/food_type';
+
 restaurantInfo1.forEach(function(restaurant) {
 
   restaurant.payment_options = restaurant.payment_options.map(function(paymentOption) {
@@ -28,9 +31,14 @@ restaurantInfo1.forEach(function(restaurant) {
 });
 
 restaurantInfo2.forEach(function(restaurant) {
+  // add rating key and assign rounded version of stars_count to create rating facet
+  restaurant.rating = Math.round(restaurant.stars_count);
+  // change name of food_type key to
+  var foodTypeMemory = restaurant[foodType];
+  delete restaurant[foodType];
+  restaurant[foodCuisineType] = foodTypeMemory;
   // merge object from right to left with Object.assign,
   // pass in empty object just in case there is a new id that didn't exist in the first JSON
-  restaurant.rating = Math.round(restaurant.stars_count);
   restaurantsById[restaurant.objectID] = Object.assign({}, restaurantsById[restaurant.objectID], restaurant);
 });
 

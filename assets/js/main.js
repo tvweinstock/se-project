@@ -13,6 +13,9 @@ $(document).ready(function () {
   var jHitsInfo = $('#hits-info');
   var jSearchInput = $('#search-box');
   var jLoader = $('.loader-container');
+  var jHitsLoadMore = $('.hits-load-more');
+  var jHitsPrev = $('.hits-load-prev');
+  var jButton = $('.hits-button');
 
   var client = algoliasearch(applicationID, apiKey);
   var helper = algoliasearchHelper(client, indexName, {
@@ -20,13 +23,17 @@ $(document).ready(function () {
     disjunctiveFacets: ['cuisine_food_type', 'rating', 'payment_options']
   });
 
+  function initPage() {
+    helper.search();
+    jLoader.hide();
+  }
+
   function success(position) {
     var lat = position.coords.latitude;
     var long = position.coords.longitude;
     // set a search to coordinates of user if it is provided
     helper.setQueryParameter('aroundLatLng', `${lat}, ${long}`);
-    helper.search();
-    jLoader.hide();
+    initPage();
   }
 
   function error() {
@@ -34,8 +41,7 @@ $(document).ready(function () {
     var sfLong = -122.41;
     // set a search to coordinates of San fran user location is not provided
     helper.setQueryParameter('aroundLatLng', `${sfLat}, ${sfLong}`);
-    helper.search();
-    jLoader.hide();
+    initPage();
   }
   // Get user location
   navigator.geolocation.getCurrentPosition(success, error);
@@ -46,8 +52,12 @@ $(document).ready(function () {
   // Bind Event Listeners
   jFacets.on('click', handleFacetClick);
 
+  jHitsLoadMore.on('click', loadMoreHits);
+  jHitsPrev.on('click', loadHitsPrev);
+
   // Tigger first search so we have page with results from start
   helper.search();
+
 
   jSearchInput.on('keyup', function() {
     helper.setQuery($(this).val())
@@ -68,6 +78,14 @@ $(document).ready(function () {
     var activeStarWidth = number * 15;
     var stars = '<span data-value='+ number +' data-attribute="rating" class="stars"><span data-value='+ number + ' data-attribute="rating" class="stars-active" style="width:'+ activeStarWidth +'px"></span>';
     return stars;
+  }
+
+  function handleHitsButtons(results) {
+    var currentPage = results.page;
+    var nbPages = results.nbPages;
+    // toggle the display of the prev/more buttons based on current page and total number of pages
+    (currentPage >= 0 && nbPages > 1) ? jHitsLoadMore.removeClass('disabled') : jHitsLoadMore.addClass('disabled');
+    (currentPage > 0 && nbPages > 1) ? jHitsPrev.removeClass('disabled') : jHitsPrev.addClass('disabled');
   }
 
   function renderFacets(jFacets, results) {
@@ -109,6 +127,24 @@ $(document).ready(function () {
               '</div></li>'
     });
     jHits.html(hitsContent);
+    handleHitsButtons(results)
+  }
+
+  function scrollToTop() {
+    $("html, body").animate({scrollTop: 0}, 200);
+  }
+  function loadHitsPrev(e) {
+    e.preventDefault();
+    var currentPage = helper.getPage();
+    helper.setPage(currentPage - 1).search();
+    scrollToTop()
+  }
+
+  function loadMoreHits(e) {
+    e.preventDefault();
+    var currentPage = helper.getPage();
+    helper.setPage(currentPage + 1).search();
+    scrollToTop()
   }
 
 });

@@ -154,6 +154,7 @@ $(document).ready(function () {
     e.preventDefault();
     helper.clearRefinements().search();
     helper.setQuery('').search();
+    jSearchInput.val('');
   }
 
 });

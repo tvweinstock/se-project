@@ -205,6 +205,9 @@ aside li a {
   justify-content: space-around;
   width: 50%;
   margin: 0 auto;
+  .hits-button {
+    display: none;
+  }
 }
 
 .hits-button {
@@ -220,8 +223,13 @@ aside li a {
     transition: all .3s ease;
     font-weight: lighter;
   }
-  &.disabled {
-    opacity: .3;
-    pointer-events: none;
+}
+.hits-no-results {
+  display: none;
+  margin: 10vh 0 50vh;
+  text-align: center;
+  h3 {
+    margin-bottom: 30px;
+    font-weight: lighter;
   }
 }

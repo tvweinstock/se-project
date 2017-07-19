@@ -15,7 +15,8 @@ $(document).ready(function () {
   var jLoader = $('.loader-container');
   var jHitsLoadMore = $('.hits-load-more');
   var jHitsPrev = $('.hits-load-prev');
-  var jButton = $('.hits-button');
+  var jHitsReset = $('.hits-reset');
+  var jHitsResetContainer = $('.hits-no-results');
 
   var client = algoliasearch(applicationID, apiKey);
   var helper = algoliasearchHelper(client, indexName, {
@@ -54,10 +55,10 @@ $(document).ready(function () {
 
   jHitsLoadMore.on('click', loadMoreHits);
   jHitsPrev.on('click', loadHitsPrev);
+  jHitsReset.on('click', reloadHits);
 
   // Tigger first search so we have page with results from start
   helper.search();
-
 
   jSearchInput.on('keyup', function() {
     helper.setQuery($(this).val())
@@ -66,8 +67,8 @@ $(document).ready(function () {
 
   function searchCallback(results) {
     if (results.hits.length === 0) {
-      // No results message
-      jHits.empty().html("No results 😔");
+      jHits.empty();
+      jHitsResetContainer.show();
       return;
     }
     renderHits(jHits, results);
@@ -84,8 +85,8 @@ $(document).ready(function () {
     var currentPage = results.page;
     var nbPages = results.nbPages;
     // toggle the display of the prev/more buttons based on current page and total number of pages
-    (currentPage >= 0 && nbPages > 1) ? jHitsLoadMore.removeClass('disabled') : jHitsLoadMore.addClass('disabled');
-    (currentPage > 0 && nbPages > 1) ? jHitsPrev.removeClass('disabled') : jHitsPrev.addClass('disabled');
+    (currentPage >= 0 && nbPages > 1) ? jHitsLoadMore.fadeIn() : jHitsLoadMore.fadeOut();
+    (currentPage > 0 && nbPages > 1) ? jHitsPrev.fadeIn() : jHitsPrev.fadeOut();
   }
 
   function renderFacets(jFacets, results) {
@@ -134,18 +135,25 @@ $(document).ready(function () {
   function scrollToTop() {
     $("html, body").animate({scrollTop: 0}, 200);
   }
+
   function loadHitsPrev(e) {
     e.preventDefault();
     var currentPage = helper.getPage();
-    helper.setPage(currentPage - 1).search();
+    helper.setPage(currentPage).previousPage().search();
     scrollToTop()
   }
 
   function loadMoreHits(e) {
     e.preventDefault();
     var currentPage = helper.getPage();
-    helper.setPage(currentPage + 1).search();
+    helper.setPage(currentPage).nextPage().search();
     scrollToTop()
+  }
+
+  function reloadHits(e) {
+    e.preventDefault();
+    helper.clearRefinements().search();
+    helper.setQuery('').search();
   }
 
 });

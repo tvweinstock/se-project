@@ -195,10 +195,15 @@ aside li a {
   margin-right: 10px;
 }
 
+.rating {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 .hit-button__container {
   display: flex;
   justify-content: space-around;
-  width: 60%;
+  width: 50%;
   margin: 0 auto;
 }
 

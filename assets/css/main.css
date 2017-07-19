@@ -197,13 +197,18 @@ aside li a {
   margin-right: 10px; }
 
 /* line 198, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+.rating {
+  display: flex;
+  flex-direction: column-reverse; }
+
+/* line 203, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
 .hit-button__container {
   display: flex;
   justify-content: space-around;
-  width: 60%;
+  width: 50%;
   margin: 0 auto; }
 
-/* line 205, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+/* line 210, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
 .hits-button {
   text-transform: capitalize;
   padding: 10px 40px;
@@ -211,13 +216,13 @@ aside li a {
   border: 1px solid rgba(0, 0, 0, 0.2);
   color: rgba(0, 0, 0, 0.6);
   transition: all .3s ease; }
-  /* line 212, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+  /* line 217, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
   .hits-button:hover {
     background-color: #000;
     color: #fff;
     transition: all .3s ease;
     font-weight: lighter; }
-  /* line 218, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
+  /* line 223, /Users/tobiweinstock/Documents/dev/code/se-project/assets/scss/main.scss */
   .hits-button.disabled {
     opacity: .3;
     pointer-events: none; }

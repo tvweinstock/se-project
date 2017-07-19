@@ -97,11 +97,12 @@ $(document).ready(function () {
       var facetValues = results.getFacetValues(name);
       var facetsValuesList = $.map(facetValues, function(facetValue) {
         var facetValueName = name !== "rating" ?  '<span data-attribute="' + name + '" data-value="' + facetValue.name + '" >' + facetValue.name + '</span>' : displayStars(facetValue.name);
+        var facetOrder = name !== "rating" ? '' : 'order: ' + facetValue.name + ';';
         var facetValueClass = facetValue.isRefined ? 'refined'  : '';
         var valueAndCount = '<a data-attribute="' + name + '" data-value="' + facetValue.name + '" href="#">' + facetValueName + '<span class="facet-value fade" data-attribute="' + name + '" data-value="' + facetValue.name + '" >' + facetValue.count + '</span>' + '</a>';
-        return '<li class="' + facetValueClass + '">' + valueAndCount + '</li>';
+        return '<li class="' + facetValueClass + '" style="'+ facetOrder +'">' + valueAndCount + '</li>';
       })
-      return header + '<ul>' + facetsValuesList.join('') + '</ul>';
+      return header + '<ul class="'+ name +'">' + facetsValuesList.join('') + '</ul>';
     });
 
     jFacets.html(facets.join(''));
